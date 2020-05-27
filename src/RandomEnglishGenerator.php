@@ -1,7 +1,6 @@
 <?php
 namespace Suilven\RandomEnglish;
 
-
 class RandomEnglishGenerator
 {
     /** @var string configuration file for sentences */
@@ -27,12 +26,12 @@ class RandomEnglishGenerator
         $structure = $structures[0];
         
         $expression='/[\s]+/';
-        $splits = preg_split($expression,$structure, -1, PREG_SPLIT_NO_EMPTY);
+        $splits = preg_split($expression, $structure, -1, PREG_SPLIT_NO_EMPTY);
 
         $sentenceArray = [];
-        foreach($splits as $possiblyRandomWord) {
+        foreach ($splits as $possiblyRandomWord) {
             $randomized = false;
-            foreach(self::POSSIBLE_WORD_TYPES as $wordType) {
+            foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
                 $start = '[' . $wordType . ']';
                 if (substr($possiblyRandomWord, 0, strlen($start)) === $start) {
                     $sentenceArray[] = $this->getRandomWord($wordType);
