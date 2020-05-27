@@ -1,0 +1,30 @@
+{
+    "name": "suilven/random-english",
+    "type": "library",
+    "description": "Generate random plausible English, for testing search engines",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gordon Anderson",
+            "email": "gordon.b.anderson@gmail.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "Suilven\\RandomEnglish\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Suilven\\RandomEnglish\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpunit/phpunit": "^9.2@dev"
+    },
+    "require": {
+        "camspiers/porter-stemmer": "dev-master"
+    }
+}
