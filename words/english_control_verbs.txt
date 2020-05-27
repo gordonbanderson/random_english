@@ -1,0 +1,14 @@
+ask
+fail
+help
+hope
+long
+make
+order
+start
+tell
+try
+wait
+want
+wish
+would

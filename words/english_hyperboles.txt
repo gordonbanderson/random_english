@@ -1,0 +1,6 @@
+age
+dead
+die
+kill
+live
+million
