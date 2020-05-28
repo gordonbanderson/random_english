@@ -1,7 +1,6 @@
 # Random English
 [![Build Status](https://travis-ci.org/gordonbanderson/random_english.svg?branch=master)](https://travis-ci.org/gordonbanderson/random_english)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gordonbanderson/random_english/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gordonbanderson/random_english/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/gordonbanderson/random_english/badges/build.png?b=master)](https://scrutinizer-ci.com/g/gordonbanderson/random_english/build-status/master)
 [![codecov.io](https://codecov.io/github/gordonbanderson/random_english/coverage.svg?branch=master)](https://codecov.io/github/gordonbanderson/random_english?branch=master)
 
 
