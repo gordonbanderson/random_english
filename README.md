@@ -1,4 +1,25 @@
 # Random English
+[![Build Status](https://travis-ci.org/gordonbanderson/random_english.svg?branch=master)](https://travis-ci.org/gordonbanderson/random_english)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gordonbanderson/random_english/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gordonbanderson/random_english/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/gordonbanderson/random_english/badges/build.png?b=master)](https://scrutinizer-ci.com/g/gordonbanderson/random_english/build-status/master)
+[![codecov.io](https://codecov.io/github/gordonbanderson/random_english/coverage.svg?branch=master)](https://codecov.io/github/gordonbanderson/random_english?branch=master)
+
+
+[![Latest Stable Version](https://poser.pugx.org/suilven/random-english/version)](https://packagist.org/packages/suilven/random-english)
+[![Latest Unstable Version](https://poser.pugx.org/suilven/random-english/v/unstable)](//packagist.org/packages/suilven/random-english)
+[![Total Downloads](https://poser.pugx.org/suilven/random-english/downloads)](https://packagist.org/packages/suilven/random-english)
+[![License](https://poser.pugx.org/suilven/random-english/license)](https://packagist.org/packages/suilven/random-english)
+[![Monthly Downloads](https://poser.pugx.org/suilven/random-english/d/monthly)](https://packagist.org/packages/suilven/random-english)
+[![Daily Downloads](https://poser.pugx.org/suilven/random-english/d/daily)](https://packagist.org/packages/suilven/random-english)
+[![composer.lock](https://poser.pugx.org/suilven/random-english/composerlock)](https://packagist.org/packages/suilven/random-english)
+
+[![GitHub Code Size](https://img.shields.io/github/languages/code-size/gordonbanderson/random_english)](https://github.com/gordonbanderson/random_english)
+[![GitHub Repo Size](https://img.shields.io/github/repo-size/gordonbanderson/random_english)](https://github.com/gordonbanderson/random_english)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/gordonbanderson/random_english)](https://github.com/gordonbanderson/random_english)
+[![GitHub Activity](https://img.shields.io/github/commit-activity/m/gordonbanderson/random_english)](https://github.com/gordonbanderson/random_english)
+[![GitHub Issues](https://img.shields.io/github/issues/gordonbanderson/random_english)](https://github.com/gordonbanderson/random_english/issues)
+
+![codecov.io](https://codecov.io/github/gordonbanderson/random_english/branch.svg?branch=master)
 
 Generate random text that is plausible English
 
