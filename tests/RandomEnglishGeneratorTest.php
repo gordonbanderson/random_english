@@ -3,7 +3,6 @@
 
 namespace Tests\Suilven\RandomEnglish;
 
-
 use PHPUnit\Framework\TestCase;
 use Suilven\RandomEnglish\RandomEnglishGenerator;
 
