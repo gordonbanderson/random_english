@@ -12,7 +12,8 @@ class RandomEnglishGenerator
         'adjective',
         'preposition',
         'conjunction',
-        'contraction'
+        'contraction',
+        'control_verb'
     ];
 
     public function __construct()
@@ -34,7 +35,7 @@ class RandomEnglishGenerator
     /**
      * @return string a random sentence
      */
-    public function sentence()
+    public function sentence($titleCase = false)
     {
         $structures = explode(PHP_EOL, $this->config);
         shuffle($structures);
@@ -61,7 +62,22 @@ class RandomEnglishGenerator
             }
         }
 
-        return implode(" ", $sentenceArray) . '.';
+        // ensure sentence starts with a capital
+        $sentenceArray[0] = ucfirst($sentenceArray[0]);
+
+        $result = implode(" ", $sentenceArray) . '.';
+        if ($titleCase) {
+            $result = ucwords($result);
+            $result = substr_replace($result ,"",-1);
+        }
+
+        return $result;
+    }
+
+
+    public function title()
+    {
+        return $this->sentence(true);
     }
 
 
