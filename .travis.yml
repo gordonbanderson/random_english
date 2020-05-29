@@ -18,6 +18,8 @@ matrix:
       env: PHPSTAN_TEST=1
     - php: 7.4
       env: PSALM_TEST=1
+    - php: 7.4
+      env: DUPLICATE_CODE_CHECK=1
 
 env:
   global:
@@ -25,6 +27,7 @@ env:
 
 before_script:
   - composer validate
+  - if [[ $DUPLICATE_CODE_CHECK ]]; then curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && bash nodesource_setup.sh && apt install -y build-essential nodejs && npm install -g jscpd  ;fi
   #- if [[ $PHPSTAN_TEST ]]; then composer require --dev phpstan/phpstan && composer require php-http/discovery php-http/curl-client guzzlehttp/psr7 php-http/message http-interop/http-factory-guzzle; fi
 
 install:
@@ -38,6 +41,8 @@ script:
   - if [[ $PHPCS_TEST ]]; then vendor/bin/phpcs --standard=PSR2 src/ tests/ ; fi
   - if [[ $PHPSTAN_TEST ]]; then vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/; fi
   - if [[ PSALM_TEST ]]; then ./vendor/bin/psalm --show-info=true; fi
+  - if [[ $DUPLICATE_CODE_CHECK ]]; then jscpd src && jscpd tests ; fi
+
 
 after_script:
   - if [[ $PHPUNIT_COVERAGE_TEST ]]; then bash <(curl -s https://codecov.io/bash) -f coverage.xml; fi
