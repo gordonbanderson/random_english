@@ -68,7 +68,7 @@ class RandomEnglishGenerator
         $result = implode(" ", $sentenceArray) . '.';
         if ($titleCase) {
             $result = ucwords($result);
-            $result = substr_replace($result ,"",-1);
+            $result = substr_replace($result, "", -1);
         }
 
         return $result;
@@ -79,6 +79,9 @@ class RandomEnglishGenerator
     {
         return $this->sentence(true);
     }
+
+
+    
 
 
     /**
