@@ -12,6 +12,7 @@ class RandomEnglishGeneratorTest extends TestCase
     {
         srand(1000);
         $generator = new RandomEnglishGenerator();
-        $this->assertEquals('The strange will around the cup.', $generator->sentence());
+        $generator->setConfig('The [adjective] [noun] [verb] [preposition] the [noun]');
+        $this->assertEquals('The quiet bank cover near the left.',  $generator->sentence());
     }
 }

@@ -6,7 +6,12 @@ class RandomEnglishGenerator
     /** @var string configuration file for sentences */
     private $config = '';
 
-    const POSSIBLE_WORD_TYPES = ['verb', 'noun', 'preposition'];
+    const POSSIBLE_WORD_TYPES = [
+        'verb',
+        'noun',
+        'adjective',
+        'preposition'
+    ];
 
     public function __construct()
     {
