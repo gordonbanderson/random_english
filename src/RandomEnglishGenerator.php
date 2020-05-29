@@ -10,7 +10,9 @@ class RandomEnglishGenerator
         'verb',
         'noun',
         'adjective',
-        'preposition'
+        'preposition',
+        'conjunction',
+        'contraction'
     ];
 
     public function __construct()
@@ -47,7 +49,8 @@ class RandomEnglishGenerator
             foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
                 $start = '[' . $wordType . ']';
                 if (substr($possiblyRandomWord, 0, strlen($start)) === $start) {
-                    $sentenceArray[] = $this->getRandomWord($wordType);
+                    $restOfWord = str_replace($start, '', $possiblyRandomWord);
+                    $sentenceArray[] = $this->getRandomWord($wordType) . $restOfWord;
                     $randomized = true;
                     break;
                 }
