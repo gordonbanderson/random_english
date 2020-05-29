@@ -123,7 +123,7 @@ class RandomEnglishGenerator
     /**
      * @return string a plural noun
      */
-    public function plural_noun()
+    public function pluralNoun()
     {
         $plurableNoun = $this->getRandomWord('countable_noun');
         return $plurableNoun . 's';
@@ -133,7 +133,7 @@ class RandomEnglishGenerator
     /**
      * @return string a plural verb
      */
-    public function plural_verb()
+    public function pluralVerb()
     {
         // @todo Choose a random verb source file
         $plurableNoun = $this->getRandomWord('verb');
