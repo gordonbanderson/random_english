@@ -43,6 +43,12 @@ class RandomEnglishGeneratorTest extends TestCase
         $this->assertEquals('Order!! You cannot boat here.', $generator->sentence());
     }
 
+    public function testParagraph()
+    {
+        $generator = new RandomEnglishGenerator();
+        error_log($generator->paragraph());
+    }
+
     //
 
     public function skiptestLots()

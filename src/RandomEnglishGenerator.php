@@ -7,13 +7,29 @@ class RandomEnglishGenerator
     private $config = '';
 
     const POSSIBLE_WORD_TYPES = [
-        'verb',
         'noun',
+        'countable_noun',
+
         'adjective',
         'preposition',
         'conjunction',
         'contraction',
-        'control_verb'
+        'control_verb',
+
+        'sequence_adverb',
+        'frequency_adverb',
+
+        // pluralize and ing these?
+        'intransitive_verb',
+        'irregular_verb',
+        'transitive_verb',
+        'verb',
+
+
+        // positions
+        'locative',
+
+
     ];
 
     public function __construct()
@@ -33,6 +49,9 @@ class RandomEnglishGenerator
 
 
     /**
+     * Generate a random sentence
+     *
+     * @param bool $titleCase true to generate a title, false (default) to generate a sentence
      * @return string a random sentence
      */
     public function sentence($titleCase = false)
@@ -75,13 +94,62 @@ class RandomEnglishGenerator
     }
 
 
+    /**
+     * Generate a random title
+     * @return string a random sentence, all in caps, no trailing full stop
+     */
     public function title()
     {
         return $this->sentence(true);
     }
 
 
-    
+    /**
+     * @param int $maxSentences The maximum number of sentences
+     * @return string a paragraph of random sentences
+     */
+    public function paragraph($maxSentences = 10)
+    {
+        $nParagraph = rand(1, $maxSentences);
+        $sentences = [];
+        for ($i=0; $i< $maxSentences; $i++) {
+            $sentences[] = $this->sentence();
+        }
+
+        return implode("  ", $sentences);
+    }
+
+
+    /**
+     * @return string a plural noun
+     */
+    public function plural_noun()
+    {
+        $plurableNoun = $this->getRandomWord('countable_noun');
+        return $plurableNoun . 's';
+    }
+
+
+    /**
+     * @return string a plural verb
+     */
+    public function plural_verb()
+    {
+        // @todo Choose a random verb source file
+        $plurableNoun = $this->getRandomWord('verb');
+        return $plurableNoun . 's';
+    }
+
+
+    /**
+     * @return string doing version of a verb
+     */
+    public function verbing()
+    {
+        // @todo Choose a random verb source file
+        $plurableNoun = $this->getRandomWord('verb');
+        return $plurableNoun . 'ing';
+    }
 
 
     /**
