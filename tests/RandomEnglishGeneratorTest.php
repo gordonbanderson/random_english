@@ -1,5 +1,4 @@
-<?php
-
+<?php declare(strict_types = 1);
 
 namespace Tests\Suilven\RandomEnglish;
 
@@ -8,55 +7,56 @@ use Suilven\RandomEnglish\RandomEnglishGenerator;
 
 class RandomEnglishGeneratorTest extends TestCase
 {
-    public function setUp()
+
+    public function setUp(): void
     {
         parent::setUp();
-        srand(1000);
+
+        \srand(1000);
     }
 
-    public function testSentence()
+    public function testSentence(): void
     {
-        $generator = new RandomEnglishGenerator();
+        $generator = new RandomEnglishGenerator;
         $generator->setConfig('The [adjective] [noun] [verb] [preposition] the [noun]');
         $this->assertEquals('The quiet bank cover near the left.', $generator->sentence());
     }
 
-    public function testComma()
+    public function testComma(): void
     {
-        $generator = new RandomEnglishGenerator();
+        $generator = new RandomEnglishGenerator;
         $generator->setConfig('It was [adjective] in the [noun], [contraction] [noun] was [adjective]');
         $this->assertEquals('It was quiet in the bank, your bread was low.', $generator->sentence());
     }
 
-    public function testTitle()
+    public function testTitle(): void
     {
-        $generator = new RandomEnglishGenerator();
+        $generator = new RandomEnglishGenerator;
         $generator->setConfig('It was [adjective] in the [noun], [contraction] [noun] was [adjective]');
         $this->assertEquals('It Was Quiet In The Bank, Your Bread Was Low', $generator->title());
     }
 
-
-    public function testCapitalFirstWord()
+    public function testCapitalFirstWord(): void
     {
-        $generator = new RandomEnglishGenerator();
+        $generator = new RandomEnglishGenerator;
         $generator->setConfig('[control_verb]!!  You cannot [verb] here');
         $this->assertEquals('Order!! You cannot boat here.', $generator->sentence());
     }
 
-    public function testParagraph()
+    public function testParagraph(): void
     {
-        $generator = new RandomEnglishGenerator();
-        error_log($generator->paragraph());
+        $generator = new RandomEnglishGenerator;
+        \error_log($generator->paragraph());
     }
 
-    //
-
-    public function skiptestLots()
+    public function skiptestLots(): void
     {
-        srand(1000);
-        $generator = new RandomEnglishGenerator();
+        \srand(1000);
+        $generator = new RandomEnglishGenerator;
+
         for ($i=0; $i< 100; $i++) {
-            error_log($generator->sentence());
+            \error_log($generator->sentence());
         }
     }
+
 }
