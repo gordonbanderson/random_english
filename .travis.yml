@@ -27,7 +27,7 @@ env:
 
 before_script:
   - composer validate
-  - if [[ $DUPLICATE_CODE_CHECK ]]; then sudo apt remove -y nodejs && curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh && sudo apt install -y build-essential nodejs && which npm && npm install -g jscpd  ;fi
+  - if [[ $DUPLICATE_CODE_CHECK ]]; then sudo apt remove -y nodejs && curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh && sudo apt install -y build-essential nodejs && which npm && npm install jscpd  ;fi
   #- if [[ $PHPSTAN_TEST ]]; then composer require --dev phpstan/phpstan && composer require php-http/discovery php-http/curl-client guzzlehttp/psr7 php-http/message http-interop/http-factory-guzzle; fi
 
 install:
