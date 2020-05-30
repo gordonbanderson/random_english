@@ -41,7 +41,7 @@ script:
   - if [[ $PHPCS_TEST ]]; then vendor/bin/phpcs --standard=PSR2 src/ tests/ ; fi
   - if [[ $PHPSTAN_TEST ]]; then vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/; fi
   - if [[ $PSALM_TEST ]]; then ./vendor/bin/psalm --show-info=true; fi
-  - if [[ $DUPLICATE_CODE_CHECK ]]; then jscpd src && jscpd tests ; fi
+  - if [[ $DUPLICATE_CODE_CHECK ]]; then node_modules/jscpd/bin/jscpd src && node_modules/jscpd/bin/jscpd tests ; fi
 
 
 after_script:
