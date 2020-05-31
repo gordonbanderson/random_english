@@ -117,7 +117,9 @@
 	<rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>
 	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint"/>
 	<rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
+	<!-- This is not compatible with PHP < 7.4
 	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint"/>
+	-->
 	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
 	<rule ref="SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint"/>
 	<rule ref="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax"/>

@@ -32,7 +32,7 @@ class RandomEnglishGenerator
     ];
 
     /** @var string configuration file for sentences */
-    private string $config = '';
+    private $config = '';
 
     public function __construct()
     {
