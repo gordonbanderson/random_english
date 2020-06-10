@@ -1,8 +1,8 @@
 FROM php:7.4-cli-buster
 
 RUN apt -y update && apt -y upgrade
-RUN apt -y install figlet git zip unzip
-RUN apt-get -y autoremove && apt-get -y clean
+RUN apt search libxslt1.1
+RUN apt -y install figlet git zip unzip libxslt1-dev libxslt1.1 default-mysql-client
 
 # alter bash prompt
 ENV PS1A="\u@randomenglish.test:\w> "
@@ -15,7 +15,12 @@ RUN echo 'figlet -w 120 Random English' >> ~/.bashrc
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && \
     composer global require hirak/prestissimo --no-plugins --no-scripts
 
+# Missing PHP extensions
+RUN docker-php-ext-install mysqli && docker-php-ext-install xsl
+
+# Cleanup
+RUN apt-get -y autoremove && apt-get -y clean
+
 # Prevent the container from exiting
 CMD tail -f /dev/null
 
-RUN docker-php-ext-install mysqli
