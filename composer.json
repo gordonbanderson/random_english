@@ -35,10 +35,11 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "checkpsr2": "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
-        "fixpsr2": "vendor/bin/phpcbf --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
+        "checkcs": "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
+        "fixcs": "vendor/bin/phpcbf --standard=ruleset.xml --extensions=php --tab-width=4 -sp src tests",
         "phpstan": "vendor/bin/phpstan analyse --level=6 -c tests/phpstan.neon src/",
         "psalm": "vendor/bin/psalm --show-info=true",
-        "test": "vendor/bin/phpunit tests"
+        "test": "vendor/bin/phpunit tests",
+        "checkCode": "composer checkcs && composer phpstan && composer psalm"
     }
 }
