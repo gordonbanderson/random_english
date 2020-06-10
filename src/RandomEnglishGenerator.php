@@ -40,11 +40,13 @@ class RandomEnglishGenerator
         $this->setConfig(\file_get_contents($configFile));
     }
 
+
     /** @param string $newConfig configuration file of how sentence structures */
     public function setConfig(string $newConfig): void
     {
         $this->config = \trim($newConfig);
     }
+
 
     /**
      * Generate a random sentence
@@ -98,6 +100,7 @@ class RandomEnglishGenerator
         return $result;
     }
 
+
     /**
      * Generate a random title
      *
@@ -107,6 +110,7 @@ class RandomEnglishGenerator
     {
         return $this->sentence(true);
     }
+
 
     /**
      * @param int $maxSentences The maximum number of sentences
@@ -124,6 +128,7 @@ class RandomEnglishGenerator
         return \implode("  ", $sentences);
     }
 
+
     /** @return string a plural noun */
     public function pluralNoun(): string
     {
@@ -131,6 +136,7 @@ class RandomEnglishGenerator
 
         return $plurableNoun . 's';
     }
+
 
     /** @return string a plural verb */
     public function pluralVerb(): string
@@ -141,6 +147,7 @@ class RandomEnglishGenerator
         return $plurableNoun . 's';
     }
 
+
     /** @return string doing version of a verb */
     public function verbing(): string
     {
@@ -149,6 +156,7 @@ class RandomEnglishGenerator
 
         return $plurableNoun . 'ing';
     }
+
 
     /**
      * @param string $wordType the type of word, e.g. noun, verb
@@ -162,5 +170,4 @@ class RandomEnglishGenerator
 
         return $words[0];
     }
-
 }

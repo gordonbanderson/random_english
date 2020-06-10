@@ -15,12 +15,14 @@ class RandomEnglishGeneratorTest extends TestCase
         \srand(1000);
     }
 
+
     public function testSentence(): void
     {
         $generator = new RandomEnglishGenerator();
         $generator->setConfig('The [adjective] [noun] [verb] [preposition] the [noun]');
         $this->assertEquals('The quiet bank cover near the left.', $generator->sentence());
     }
+
 
     public function testComma(): void
     {
@@ -29,12 +31,14 @@ class RandomEnglishGeneratorTest extends TestCase
         $this->assertEquals('It was quiet in the bank, your bread was low.', $generator->sentence());
     }
 
+
     public function testTitle(): void
     {
         $generator = new RandomEnglishGenerator();
         $generator->setConfig('It was [adjective] in the [noun], [contraction] [noun] was [adjective]');
         $this->assertEquals('It Was Quiet In The Bank, Your Bread Was Low', $generator->title());
     }
+
 
     public function testCapitalFirstWord(): void
     {
@@ -43,11 +47,13 @@ class RandomEnglishGeneratorTest extends TestCase
         $this->assertEquals('Order!! You cannot boat here.', $generator->sentence());
     }
 
+
     public function testParagraph(): void
     {
         $generator = new RandomEnglishGenerator();
         \error_log($generator->paragraph());
     }
+
 
     public function skiptestLots(): void
     {
@@ -57,5 +63,4 @@ class RandomEnglishGeneratorTest extends TestCase
             \error_log($generator->sentence());
         }
     }
-
 }
