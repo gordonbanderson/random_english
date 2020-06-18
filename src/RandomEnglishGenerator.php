@@ -74,34 +74,30 @@ class RandomEnglishGenerator
         $sentenceArray = [];
 
         foreach ($splits as $possiblyRandomWord) {
-            error_log('---- WORD ' . $possiblyRandomWord . '----');
             $randomized = false;
 
             foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
-                error_log('--------- WORD TYPE: ' . $wordType . '------');
-                $ing = substr($wordType, -4)=== '_ing';
-                error_log('ING: ' . $ing);
+                $ing = \substr($wordType, -4)=== '_ing';
                 if ($ing) {
-                    $wordType = str_replace('_ing', '' , $wordType);
-                    $possiblyRandomWord = str_replace('_ing', '' , $possiblyRandomWord);
+                    $wordType = \str_replace('_ing', '', $wordType);
+                    $possiblyRandomWord = \str_replace('_ing', '', $possiblyRandomWord);
                 }
                 $start = '[' . $wordType . ']';
-
-                error_log('T1: possibly random word:' . $possiblyRandomWord);
-                error_log('T2: Start: ' . $start);
-
-                if (\substr($possiblyRandomWord, 0, \strlen($start)) === $start) {
-                    $restOfWord = \str_replace($start, '', $possiblyRandomWord);
-                    $randomWord = $this->getRandomWord($wordType);
-                    if ($ing) {
-                        $helper = new LanguageHelper();
-                        $randomWord = $helper->ingVerb($randomWord);
-                    }
-                    $sentenceArray[] =$randomWord . $restOfWord;
-                    $randomized = true;
-
-                    break;
+                
+                if (\substr($possiblyRandomWord, 0, \strlen($start)) !== $start) {
+                    continue;
                 }
+
+                $restOfWord = \str_replace($start, '', $possiblyRandomWord);
+                $randomWord = $this->getRandomWord($wordType);
+                if ($ing) {
+                    $helper = new LanguageHelper();
+                    $randomWord = $helper->ingVerb($randomWord);
+                }
+                $sentenceArray[] =$randomWord . $restOfWord;
+                $randomized = true;
+
+                break;
             }
 
             if ($randomized) {
@@ -121,6 +117,9 @@ class RandomEnglishGenerator
             $result = \ucwords($result);
             $result = \substr_replace($result, "", -1);
         }
+
+        $result = \str_replace('?.', '?', $result);
+        $result = \str_replace('!.', '?', $result);
 
         return $result;
     }

@@ -25,7 +25,7 @@ class LanguageHelper
 
     public function ingVerb($verb)
     {
-        $verbPart = rtrim($verb, 'e');
+        $verbPart = \rtrim($verb, 'e');
 
         return $verbPart . 'ing';
     }
