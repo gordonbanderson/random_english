@@ -6,12 +6,10 @@ use Doctrine\Inflector\InflectorFactory;
 
 class LanguageHelper
 {
-    /**
-     * @var [string]
-     */
     private const DOUBLE_LAST_CHARS = ['b', 'd', 'g', 'm', 'n', 'p', 't'];
 
-    private const DO_NOT_DOUBLE_LAST_CHAR_TWO_CHARS = ['ad', 'ld', 'nd', 'rd', 'ng', 'im', 'rm', 'ct', 'at', 'ht',  'rt', 'st'];
+    private const DO_NOT_DOUBLE_LAST_CHAR_TWO_CHARS = ['ad', 'ld', 'nd', 'rd', 'ng', 'im',
+        'rm', 'ct', 'at', 'ht', 'rt', 'st'];
 
     /** @var \Doctrine\Inflector\Inflector */
     private $inflector;
@@ -36,17 +34,18 @@ class LanguageHelper
 
     /**
      * Attempt to convert a verb into a verb with ing.
+     *
      * @param string $verb a verb
      * @return string the ing version of the verb
      */
     public function ingVerb(string $verb): string
     {
-        $lastChar = substr($verb, -1);
-        $lastTwoChars = substr($verb, -2);
+        $lastChar = \substr($verb, -1);
+        $lastTwoChars = \substr($verb, -2);
         $verbPart = \rtrim($verb, 'e');
 
-        if (in_array($lastChar, self::DOUBLE_LAST_CHARS)
-        && !in_array($lastTwoChars, self::DO_NOT_DOUBLE_LAST_CHAR_TWO_CHARS)) {
+        if (\in_array($lastChar, self::DOUBLE_LAST_CHARS, true)
+        && !\in_array($lastTwoChars, self::DO_NOT_DOUBLE_LAST_CHAR_TWO_CHARS, true)) {
             $verbPart .= $lastChar;
         }
 

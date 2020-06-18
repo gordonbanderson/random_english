@@ -58,12 +58,13 @@ class LanguageHelperTest extends TestCase
     }
 
 
-    public function testAllVerbs(): void {
+    public function testAllVerbs(): void
+    {
         $wordType = 'verb';
         $wordsFile = \dirname(__FILE__) . '/../../words/english_' . $wordType . 's.txt';
         $words = \explode(\PHP_EOL, \trim(\file_get_contents($wordsFile)));
-        foreach($words as $word) {
-            error_log($word . ' --> ' . $this->helper->ingVerb($word));
+        foreach ($words as $word) {
+            \error_log($word . ' --> ' . $this->helper->ingVerb($word));
         }
     }
 }
