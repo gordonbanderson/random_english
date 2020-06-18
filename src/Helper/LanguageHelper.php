@@ -17,13 +17,21 @@ class LanguageHelper
     }
 
 
-    public function pluralizeNoun($noun)
+    /**
+     * @param string $noun A noun
+     * @return string the plurarl of that noun
+     */
+    public function pluralizeNoun(string $noun): string
     {
         return $this->inflector->pluralize($noun);
     }
 
 
-    public function ingVerb($verb)
+    /**
+     * @param string $verb a verb
+     * @return string the ing version of the verb
+     */
+    public function ingVerb(string $verb): string
     {
         $verbPart = \rtrim($verb, 'e');
 

@@ -48,7 +48,6 @@ class RandomEnglishGeneratorTest extends TestCase
     }
 
 
-
     public function testVerbing(): void
     {
         $generator = new RandomEnglishGenerator();
