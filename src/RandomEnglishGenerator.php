@@ -35,6 +35,9 @@ class RandomEnglishGenerator
         // positions
         'locative',
 
+        'plural_noun',
+
+
 
     ];
 
@@ -77,6 +80,13 @@ class RandomEnglishGenerator
             $randomized = false;
 
             foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
+                $pluralNoun = ($wordType === 'plural_noun');
+                if ($pluralNoun) {
+                    $wordType = 'noun';
+                    $possiblyRandomWord = \str_replace('plural_', '', $possiblyRandomWord);
+
+                }
+
                 $ing = \substr($wordType, -4)=== '_ing';
                 if ($ing) {
                     $wordType = \str_replace('_ing', '', $wordType);
@@ -90,6 +100,11 @@ class RandomEnglishGenerator
 
                 $restOfWord = \str_replace($start, '', $possiblyRandomWord);
                 $randomWord = $this->getRandomWord($wordType);
+                if ($pluralNoun) {
+                    $helper = new LanguageHelper();
+
+                    $randomWord = $helper->pluralizeNoun($randomWord);
+                }
                 if ($ing) {
                     $helper = new LanguageHelper();
                     $randomWord = $helper->ingVerb($randomWord);

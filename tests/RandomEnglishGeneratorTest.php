@@ -56,6 +56,14 @@ class RandomEnglishGeneratorTest extends TestCase
     }
 
 
+    public function testPluralNoun(): void
+    {
+        $generator = new RandomEnglishGenerator();
+        $generator->setConfig('How many [plural_noun] do you have?');
+        $this->assertEquals('How many stranges do you have?', $generator->sentence());
+    }
+
+
     public function testParagraph(): void
     {
         $generator = new RandomEnglishGenerator();
