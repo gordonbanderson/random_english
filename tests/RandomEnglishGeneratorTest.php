@@ -48,6 +48,15 @@ class RandomEnglishGeneratorTest extends TestCase
     }
 
 
+
+    public function testVerbing(): void
+    {
+        $generator = new RandomEnglishGenerator();
+        $generator->setConfig('What are you [verb_ing]?');
+        $this->assertEquals('What are you providing?', $generator->sentence());
+    }
+
+
     public function testParagraph(): void
     {
         $generator = new RandomEnglishGenerator();

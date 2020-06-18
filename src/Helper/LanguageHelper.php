@@ -2,12 +2,11 @@
 
 namespace Suilven\RandomEnglish\Helper;
 
-use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;
 
 class LanguageHelper
 {
-    /** @var Inflector */
+    /** @var \Doctrine\Inflector\Inflector */
     private $inflector;
 
 
@@ -24,10 +23,10 @@ class LanguageHelper
     }
 
 
-
     public function ingVerb($verb)
     {
-        return $verb . 'ing';
-    }
+        $verbPart = rtrim($verb, 'e');
 
+        return $verbPart . 'ing';
+    }
 }
