@@ -30,7 +30,6 @@ beer
 begin
 behave
 bell
-best
 better
 big
 bird
