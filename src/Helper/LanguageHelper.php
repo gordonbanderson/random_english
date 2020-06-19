@@ -43,7 +43,7 @@ class LanguageHelper
         'ot',
         'pt',
         'rt',
-        'st'
+        'st',
     ];
 
     /** @var \Doctrine\Inflector\Inflector */
