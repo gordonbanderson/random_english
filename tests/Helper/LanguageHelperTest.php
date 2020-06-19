@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Tests\Suilven\RandomEnglish\Helper;
 
@@ -33,10 +33,8 @@ class LanguageHelperTest extends TestCase
     {
         $this->assertEquals('testing', $this->helper->ingVerb('test'));
         $this->assertEquals('kicking', $this->helper->ingVerb('kick'));
-        $this->assertEquals('queuing', $this->helper->ingVerb('queue'));
         $this->assertEquals('amusing', $this->helper->ingVerb('amuse'));
         $this->assertEquals('sitting', $this->helper->ingVerb('sit'));
-        $this->assertEquals('clapping', $this->helper->ingVerb('clap'));
         $this->assertEquals('clubbing', $this->helper->ingVerb('club'));
         $this->assertEquals('kidding', $this->helper->ingVerb('kid'));
         $this->assertEquals('dogging', $this->helper->ingVerb('dog'));
@@ -55,13 +53,10 @@ class LanguageHelperTest extends TestCase
         $this->assertEquals("bleeding", $this->helper->ingVerb("bleed"));
         $this->assertEquals("bottoming", $this->helper->ingVerb("bottom"));
         $this->assertEquals("browning", $this->helper->ingVerb("brown"));
-        $this->assertEquals("burnning", $this->helper->ingVerb("burn"));
+        $this->assertEquals("burning", $this->helper->ingVerb("burn"));
         $this->assertEquals("chickening", $this->helper->ingVerb("chicken"));
         $this->assertEquals("climbing", $this->helper->ingVerb("climb"));
-        $this->assertEquals("coining", $this->helper->ingVerb("coin"));
         $this->assertEquals("combing", $this->helper->ingVerb("comb"));
-        $this->assertEquals("conditioning", $this->helper->ingVerb("condition"));
-        $this->assertEquals("containing", $this->helper->ingVerb("contain"));
         $this->assertEquals("controlling", $this->helper->ingVerb("control"));
         $this->assertEquals("counting", $this->helper->ingVerb("count"));
         $this->assertEquals("developing", $this->helper->ingVerb("develop"));
@@ -74,20 +69,16 @@ class LanguageHelperTest extends TestCase
         $this->assertEquals("evening", $this->helper->ingVerb("even"));
         $this->assertEquals("eventing", $this->helper->ingVerb("event"));
         $this->assertEquals("excepting", $this->helper->ingVerb("except"));
-        $this->assertEquals("explaining", $this->helper->ingVerb("explain"));
         $this->assertEquals("faulting", $this->helper->ingVerb("fault"));
         $this->assertEquals("feeding", $this->helper->ingVerb("feed"));
         $this->assertEquals("filming", $this->helper->ingVerb("film"));
         $this->assertEquals("footing", $this->helper->ingVerb("foot"));
         $this->assertEquals("freeing", $this->helper->ingVerb("free"));
         $this->assertEquals("fronting", $this->helper->ingVerb("front"));
-        $this->assertEquals("fruiting", $this->helper->ingVerb("fruit"));
         $this->assertEquals("grouping", $this->helper->ingVerb("group"));
-        $this->assertEquals("happenning", $this->helper->ingVerb("happen"));
+        $this->assertEquals("happening", $this->helper->ingVerb("happen"));
         $this->assertEquals("helping", $this->helper->ingVerb("help"));
         $this->assertEquals("inventing", $this->helper->ingVerb("invent"));
-        $this->assertEquals("ironing", $this->helper->ingVerb("iron"));
-        $this->assertEquals("joining", $this->helper->ingVerb("join"));
         $this->assertEquals("jumping", $this->helper->ingVerb("jump"));
         $this->assertEquals("keeping", $this->helper->ingVerb("keep"));
         $this->assertEquals("kneeing", $this->helper->ingVerb("knee"));
@@ -97,8 +88,6 @@ class LanguageHelperTest extends TestCase
         $this->assertEquals("listening", $this->helper->ingVerb("listen"));
         $this->assertEquals("marketing", $this->helper->ingVerb("market"));
         $this->assertEquals("meeting", $this->helper->ingVerb("meet"));
-        $this->assertEquals("mentioning", $this->helper->ingVerb("mention"));
-        $this->assertEquals("mooning", $this->helper->ingVerb("moon"));
         $this->assertEquals("needing", $this->helper->ingVerb("need"));
         $this->assertEquals("opening", $this->helper->ingVerb("open"));
         $this->assertEquals("outing", $this->helper->ingVerb("out"));
@@ -108,15 +97,12 @@ class LanguageHelperTest extends TestCase
         $this->assertEquals("planting", $this->helper->ingVerb("plant"));
         $this->assertEquals("pocketing", $this->helper->ingVerb("pocket"));
         $this->assertEquals("pointing", $this->helper->ingVerb("point"));
-        $this->assertEquals("poisoning", $this->helper->ingVerb("poison"));
-        $this->assertEquals("positioning", $this->helper->ingVerb("position"));
-        $this->assertEquals("presenting", $this->helper->ingVerb("present"));
+         $this->assertEquals("presenting", $this->helper->ingVerb("present"));
         $this->assertEquals("preventing", $this->helper->ingVerb("prevent"));
         $this->assertEquals("queening", $this->helper->ingVerb("queen"));
-        $this->assertEquals("questioning", $this->helper->ingVerb("question"));
         $this->assertEquals("renting", $this->helper->ingVerb("rent"));
         $this->assertEquals("resulting", $this->helper->ingVerb("result"));
-        $this->assertEquals("returnnng", $this->helper->ingVerb("return"));
+        $this->assertEquals("returning", $this->helper->ingVerb("return"));
         $this->assertEquals("rooming", $this->helper->ingVerb("room"));
         $this->assertEquals("seeing", $this->helper->ingVerb("see"));
         $this->assertEquals("seeding", $this->helper->ingVerb("seed"));
@@ -126,20 +112,13 @@ class LanguageHelperTest extends TestCase
         $this->assertEquals("shouting", $this->helper->ingVerb("shout"));
         $this->assertEquals("signalling", $this->helper->ingVerb("signal"));
         $this->assertEquals("sleeping", $this->helper->ingVerb("sleep"));
-        $this->assertEquals("soaping", $this->helper->ingVerb("soap"));
         $this->assertEquals("souping", $this->helper->ingVerb("soup"));
         $this->assertEquals("stamping", $this->helper->ingVerb("stamp"));
-        $this->assertEquals("stationing", $this->helper->ingVerb("station"));
         $this->assertEquals("steaming", $this->helper->ingVerb("steam"));
-        $this->assertEquals("swimming", $this->helper->ingVerb("swim"));
         $this->assertEquals("teaming", $this->helper->ingVerb("team"));
         $this->assertEquals("totalling", $this->helper->ingVerb("total"));
-        $this->assertEquals("training", $this->helper->ingVerb("train"));
         $this->assertEquals("travelling", $this->helper->ingVerb("travel"));
         $this->assertEquals("turning", $this->helper->ingVerb("turn"));
-        $this->assertEquals("visiting", $this->helper->ingVerb("visit"));
-        $this->assertEquals("waiting", $this->helper->ingVerb("wait"));
-        $this->assertEquals("trimming", $this->helper->ingVerb("trim"));
         $this->assertEquals("wanting", $this->helper->ingVerb("want"));
         $this->assertEquals("worrying", $this->helper->ingVerb("worry"));
 
@@ -148,6 +127,52 @@ class LanguageHelperTest extends TestCase
         $this->assertEquals('collecting', $this->helper->ingVerb('collect'));
 
         // @todo aim visit wait
+
+        // possibly problematic
+        $this->assertEquals("training", $this->helper->ingVerb("train"));
+        $this->assertEquals("explaining", $this->helper->ingVerb("explain"));
+        $this->assertEquals("containing", $this->helper->ingVerb("contain"));
+        $this->assertEquals("coining", $this->helper->ingVerb("coin"));
+        $this->assertEquals("joining", $this->helper->ingVerb("join"));
+
+        //Counter example
+        $this->assertEquals("spinning", $this->helper->ingVerb("spin"));
+
+
+        $this->assertEquals("stationing", $this->helper->ingVerb("station"));
+        $this->assertEquals("poisoning", $this->helper->ingVerb("poison"));
+        $this->assertEquals("positioning", $this->helper->ingVerb("position"));
+        $this->assertEquals("mooning", $this->helper->ingVerb("moon"));
+        $this->assertEquals("ironing", $this->helper->ingVerb("iron"));
+        $this->assertEquals("conditioning", $this->helper->ingVerb("condition"));
+        $this->assertEquals("mentioning", $this->helper->ingVerb("mention"));
+        $this->assertEquals("questioning", $this->helper->ingVerb("question"));
+
+        //Counter example
+        $this->assertEquals("conning", $this->helper->ingVerb("con"));
+
+
+        $this->assertEquals("soaping", $this->helper->ingVerb("soap"));
+
+        // counter example
+        $this->assertEquals('clapping', $this->helper->ingVerb('clap'));
+
+
+
+        $this->assertEquals("swimming", $this->helper->ingVerb("swim"));
+        $this->assertEquals("trimming", $this->helper->ingVerb("trim"));
+
+        // Counter example
+        $this->assertEquals("timing", $this->helper->ingVerb("tim"));
+
+
+        $this->assertEquals("visiting", $this->helper->ingVerb("visit"));
+        $this->assertEquals("waiting", $this->helper->ingVerb("wait"));
+
+
+
+
+        $this->assertEquals('queuing', $this->helper->ingVerb('queue'));
     }
 
 

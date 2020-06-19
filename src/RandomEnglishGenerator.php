@@ -84,7 +84,6 @@ class RandomEnglishGenerator
                 if ($pluralNoun) {
                     $wordType = 'noun';
                     $possiblyRandomWord = \str_replace('plural_', '', $possiblyRandomWord);
-
                 }
 
                 $ing = \substr($wordType, -4)=== '_ing';
@@ -93,7 +92,7 @@ class RandomEnglishGenerator
                     $possiblyRandomWord = \str_replace('_ing', '', $possiblyRandomWord);
                 }
                 $start = '[' . $wordType . ']';
-                
+
                 if (\substr($possiblyRandomWord, 0, \strlen($start)) !== $start) {
                     continue;
                 }
