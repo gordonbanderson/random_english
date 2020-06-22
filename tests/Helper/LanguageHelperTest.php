@@ -167,13 +167,15 @@ class LanguageHelperTest extends TestCase
         $this->assertEquals("timing", $this->helper->ingVerb("tim"));
 
 
-        $this->assertEquals("visiting", $this->helper->ingVerb("visit"));
         $this->assertEquals("waiting", $this->helper->ingVerb("wait"));
 
 
 
 
         $this->assertEquals('queuing', $this->helper->ingVerb('queue'));
+
+        $this->assertEquals("visiting", $this->helper->ingVerb("visit"));
+
     }
 
 

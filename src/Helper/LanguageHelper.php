@@ -23,7 +23,6 @@ class LanguageHelper
         'wn',
         'rn',
         'am',
-        'im',
         'om',
         'rm',
         'rn',
@@ -49,12 +48,15 @@ class LanguageHelper
 
     private const DO_NOT_DOUBLE_LAST_CHAR_THREE_CHARS = [
         'ain',
+        'ait',
         'ion',
         'oin',
         'son',
         'oap',
         'oon',
-        'ron'
+        'ron',
+        'sit', // visit
+        'tim'
     ];
 
 
@@ -87,7 +89,6 @@ class LanguageHelper
      */
     public function ingVerb(string $verb): string
     {
-        error_log('VERB: ' . $verb);
         $lastChar = \substr($verb, -1);
         $lastTwoChars = \substr($verb, -2);
         $lastThreeChars = \substr($verb, -3);
@@ -96,9 +97,6 @@ class LanguageHelper
         if (\substr($verb, -1) === 'e' && \substr($verb, -2) !== 'ee') {
             $verbPart = \rtrim($verb, 'e');
         }
-
-        \error_log('VERB PART: ' . $verbPart);
-
 
         if (\in_array($lastChar, self::DOUBLE_LAST_CHARS, true)
             && !\in_array($lastTwoChars, self::DO_NOT_DOUBLE_LAST_CHAR_TWO_CHARS, true)
@@ -111,6 +109,13 @@ class LanguageHelper
 
         // deal with lie ->lying
         $result = \str_replace('iing', 'ying', $result);
+
+        // deal with special cases
+        switch($verb) {
+            case 'sit':
+                $result = 'sitting';
+                break;
+        }
 
         return $result;
     }
