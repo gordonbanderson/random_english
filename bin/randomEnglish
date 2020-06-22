@@ -17,9 +17,11 @@ class RandomSentences
         $cli->description('Generate random English')
             ->command('sentences')
             ->description('Output random English sentences')
+            ->command('paragraphs')
+            ->description('Output random English paragraphs')
 
             ->command('*')
-            ->arg('number:n', 'The number of sentences', true)
+            ->arg('number:n', 'The number of sentences or paragraphs to render', true)
         ;
         return $cli;
     }
@@ -46,15 +48,30 @@ class RandomSentences
 
         error_log(print_r($args, 1));
 
+        $cmd = $args->getCommand();
+
         $generator = new \Suilven\RandomEnglish\RandomEnglishGenerator();
         $number = $args->getArg('number:n');
-        error_log('NUMBER: ' . $number);
-        for ($i=0; $i < $number; $i++) {
-            $sentence = $generator->sentence();
-            error_log($sentence);
+
+        switch ($cmd) {
+            case 'sentences':
+                for ($i=0; $i < $number; $i++) {
+                    $sentence = $generator->sentence();
+                    error_log($sentence);
+                }
+                break;
+
+            case 'paragraphs':
+                for ($i=0; $i < $number; $i++) {
+                    $para = $generator->paragraph();
+                    error_log($para);
+                    error_log("\n");
+                }
+                break;
+
         }
 
-
+        error_log('NUMBER: ' . $number);
 
     }
 }
