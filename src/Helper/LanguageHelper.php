@@ -46,6 +46,18 @@ class LanguageHelper
         'st',
     ];
 
+
+    private const DO_NOT_DOUBLE_LAST_CHAR_THREE_CHARS = [
+        'ain',
+        'ion',
+        'oin',
+        'son',
+        'oap',
+        'oon',
+        'ron'
+    ];
+
+
     /** @var \Doctrine\Inflector\Inflector */
     private $inflector;
 
@@ -75,8 +87,10 @@ class LanguageHelper
      */
     public function ingVerb(string $verb): string
     {
+        error_log('VERB: ' . $verb);
         $lastChar = \substr($verb, -1);
         $lastTwoChars = \substr($verb, -2);
+        $lastThreeChars = \substr($verb, -3);
 
         $verbPart = $verb;
         if (\substr($verb, -1) === 'e' && \substr($verb, -2) !== 'ee') {
@@ -87,7 +101,9 @@ class LanguageHelper
 
 
         if (\in_array($lastChar, self::DOUBLE_LAST_CHARS, true)
-        && !\in_array($lastTwoChars, self::DO_NOT_DOUBLE_LAST_CHAR_TWO_CHARS, true)) {
+            && !\in_array($lastTwoChars, self::DO_NOT_DOUBLE_LAST_CHAR_TWO_CHARS, true)
+            && !\in_array($lastThreeChars, self::DO_NOT_DOUBLE_LAST_CHAR_THREE_CHARS, true)
+        ) {
             $verbPart .= $lastChar;
         }
 

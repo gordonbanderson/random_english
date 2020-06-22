@@ -137,6 +137,7 @@ class LanguageHelperTest extends TestCase
 
         //Counter example
         $this->assertEquals("spinning", $this->helper->ingVerb("spin"));
+        $this->assertEquals("binning", $this->helper->ingVerb("bin"));
 
 
         $this->assertEquals("stationing", $this->helper->ingVerb("station"));
