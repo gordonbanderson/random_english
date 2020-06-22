@@ -1,0 +1,64 @@
+#!/usr/bin/env php
+<?php
+
+if (is_file(__DIR__.'/../vendor/autoload.php') === true) {
+    include_once __DIR__.'/../vendor/autoload.php';
+} else {
+    error_log('ERROR: Autoload file could not be found');
+    exit(1);
+}
+
+class RandomSentences
+{
+
+    private function primeCLI()
+    {
+        $cli = new Garden\Cli\Cli();
+        $cli->description('Generate random English')
+            ->command('sentences')
+            ->description('Output random English sentences')
+
+            ->command('*')
+            ->arg('number:n', 'The number of sentences', true)
+        ;
+        return $cli;
+    }
+
+
+
+
+    /**
+     * Your main program
+     *
+     * Arguments and options have been parsed when this is run
+     *
+     * @param Options $options
+     * @return void
+     */
+    public function main()
+    {
+        $cli = $this->primeCLI();
+
+        /** @var \Garden\Cli\Args $args */
+        $args = $cli->parse($argv, true);
+
+
+
+        error_log(print_r($args, 1));
+
+        $generator = new \Suilven\RandomEnglish\RandomEnglishGenerator();
+        $number = $args->getArg('number:n');
+        error_log('NUMBER: ' . $number);
+        for ($i=0; $i < $number; $i++) {
+            $sentence = $generator->sentence();
+            error_log($sentence);
+        }
+
+
+
+    }
+}
+// execute it
+$cli = new RandomSentences();
+$cli->main();
+
