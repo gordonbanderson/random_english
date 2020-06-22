@@ -50,6 +50,7 @@ class LanguageHelper
         'ait',
         'ion',
         'oin',
+        'ool',
         'son',
         'oap',
         'oon',
