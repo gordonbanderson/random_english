@@ -45,7 +45,6 @@ class LanguageHelper
         'st',
     ];
 
-
     private const DO_NOT_DOUBLE_LAST_CHAR_THREE_CHARS = [
         'ain',
         'ait',
@@ -55,8 +54,9 @@ class LanguageHelper
         'oap',
         'oon',
         'ron',
-        'sit', // visit
-        'tim'
+        // visit
+        'sit',
+        'tim',
     ];
 
 
@@ -111,9 +111,10 @@ class LanguageHelper
         $result = \str_replace('iing', 'ying', $result);
 
         // deal with special cases
-        switch($verb) {
+        switch ($verb) {
             case 'sit':
                 $result = 'sitting';
+
                 break;
         }
 
