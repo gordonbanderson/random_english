@@ -109,4 +109,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Data Sources
 
-* Nouns - http://www.desiquintans.com/nounlist (public domain)
+* Mens Names - Office of National Statistics https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesenglandandwalesbabynamesstatisticsboys
+* Womens Names - Office of National Statistics https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/livebirths/datasets/babynamesenglandandwalesbabynamesstatisticsgirls
