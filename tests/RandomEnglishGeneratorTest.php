@@ -63,7 +63,7 @@ class RandomEnglishGeneratorTest extends TestCase
         $this->assertEquals('How many stranges do you have?', $generator->sentence());
     }
 
-
+    
     public function testParagraph(): void
     {
         $generator = new RandomEnglishGenerator();
