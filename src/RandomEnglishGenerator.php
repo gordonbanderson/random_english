@@ -2,6 +2,8 @@
 
 namespace Suilven\RandomEnglish;
 
+use Suilven\RandomEnglish\Helper\LanguageHelper;
+
 class RandomEnglishGenerator
 {
 
@@ -24,11 +26,21 @@ class RandomEnglishGenerator
         'transitive_verb',
         'verb',
 
+        'intransitive_verb_ing',
+        'irregular_verb_ing',
+        'transitive_verb_ing',
+        'verb_ing',
+
 
         // positions
         'locative',
 
+        'plural_noun',
 
+
+        // names
+        'mens_name',
+        'womens_name',
     ];
 
     /** @var string configuration file for sentences */
@@ -56,6 +68,7 @@ class RandomEnglishGenerator
      */
     public function sentence(bool $titleCase = false): string
     {
+        // choose a random sentence structure
         $structures = \explode(\PHP_EOL, $this->config);
         \shuffle($structures);
         $structure = $structures[0];
@@ -69,22 +82,46 @@ class RandomEnglishGenerator
             $randomized = false;
 
             foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
+                $pluralNoun = ($wordType === 'plural_noun');
+                if ($pluralNoun) {
+                    $wordType = 'noun';
+                    $possiblyRandomWord = \str_replace('plural_', '', $possiblyRandomWord);
+                }
+
+                $ing = \substr($wordType, -4)=== '_ing';
+                if ($ing) {
+                    $wordType = \str_replace('_ing', '', $wordType);
+                    $possiblyRandomWord = \str_replace('_ing', '', $possiblyRandomWord);
+                }
                 $start = '[' . $wordType . ']';
 
-                if (\substr($possiblyRandomWord, 0, \strlen($start)) === $start) {
-                    $restOfWord = \str_replace($start, '', $possiblyRandomWord);
-                    $sentenceArray[] = $this->getRandomWord($wordType) . $restOfWord;
-                    $randomized = true;
-
-                    break;
+                if (\substr($possiblyRandomWord, 0, \strlen($start)) !== $start) {
+                    continue;
                 }
+
+                $restOfWord = \str_replace($start, '', $possiblyRandomWord);
+                $randomWord = $this->getRandomWord($wordType);
+                if ($pluralNoun) {
+                    $helper = new LanguageHelper();
+
+                    $randomWord = $helper->pluralizeNoun($randomWord);
+                }
+                if ($ing) {
+                    $helper = new LanguageHelper();
+                    $randomWord = $helper->ingVerb($randomWord);
+                }
+                $sentenceArray[] =$randomWord . $restOfWord;
+                $randomized = true;
+
+                break;
             }
 
             if ($randomized) {
                 continue;
             }
 
-            $sentenceArray[] = $possiblyRandomWord;
+            $sentenceArray[] =
+                $possiblyRandomWord;
         }
 
         // ensure sentence starts with a capital
@@ -96,6 +133,9 @@ class RandomEnglishGenerator
             $result = \ucwords($result);
             $result = \substr_replace($result, "", -1);
         }
+
+        $result = \str_replace('?.', '?', $result);
+        $result = \str_replace('!.', '?', $result);
 
         return $result;
     }

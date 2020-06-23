@@ -20,7 +20,7 @@ class RandomEnglishGeneratorTest extends TestCase
     {
         $generator = new RandomEnglishGenerator();
         $generator->setConfig('The [adjective] [noun] [verb] [preposition] the [noun]');
-        $this->assertEquals('The quiet bank cover near the left.', $generator->sentence());
+        $this->assertEquals('The quiet bank reply next the god.', $generator->sentence());
     }
 
 
@@ -44,10 +44,26 @@ class RandomEnglishGeneratorTest extends TestCase
     {
         $generator = new RandomEnglishGenerator();
         $generator->setConfig('[control_verb]!!  You cannot [verb] here');
-        $this->assertEquals('Order!! You cannot boat here.', $generator->sentence());
+        $this->assertEquals('Order!! You cannot egg here.', $generator->sentence());
     }
 
 
+    public function testVerbing(): void
+    {
+        $generator = new RandomEnglishGenerator();
+        $generator->setConfig('What are you [verb_ing]?');
+        $this->assertEquals('What are you rounding?', $generator->sentence());
+    }
+
+
+    public function testPluralNoun(): void
+    {
+        $generator = new RandomEnglishGenerator();
+        $generator->setConfig('How many [plural_noun] do you have?');
+        $this->assertEquals('How many stranges do you have?', $generator->sentence());
+    }
+
+    
     public function testParagraph(): void
     {
         $generator = new RandomEnglishGenerator();
