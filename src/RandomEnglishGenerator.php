@@ -38,7 +38,9 @@ class RandomEnglishGenerator
         'plural_noun',
 
 
-
+        // names
+        'mens_name',
+        'womens_name',
     ];
 
     /** @var string configuration file for sentences */
