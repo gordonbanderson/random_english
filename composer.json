@@ -12,7 +12,7 @@
     "require": {
         "camspiers/porter-stemmer": "dev-master",
         "slevomat/coding-standard": "^6.3",
-        "doctrine/inflector": "^1|^2",
+        "doctrine/inflector": "^2.0",
         "yooper/php-text-analysis": "^1.5",
         "vanilla/garden-cli": "^2.2"
     },
