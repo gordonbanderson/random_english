@@ -25,6 +25,7 @@ class RandomEnglishGenerator
         'irregular_verb',
         'transitive_verb',
         'verb',
+        'adverb',
 
         'intransitive_verb_ing',
         'irregular_verb_ing',
