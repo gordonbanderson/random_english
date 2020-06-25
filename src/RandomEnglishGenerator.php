@@ -43,7 +43,7 @@ class RandomEnglishGenerator
         'mens_name',
         'womens_name',
         'country',
-        'colour'
+        'colour',
     ];
 
     /** @var string configuration file for sentences */
