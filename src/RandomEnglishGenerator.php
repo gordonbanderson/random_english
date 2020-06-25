@@ -42,6 +42,8 @@ class RandomEnglishGenerator
         // names
         'mens_name',
         'womens_name',
+        'country',
+        'colour',
     ];
 
     /** @var string configuration file for sentences */
@@ -101,6 +103,8 @@ class RandomEnglishGenerator
                 }
 
                 $restOfWord = \str_replace($start, '', $possiblyRandomWord);
+                // country -> countries
+                $wordType = \str_replace('country', 'countrie', $wordType);
                 $randomWord = $this->getRandomWord($wordType);
                 if ($pluralNoun) {
                     $helper = new LanguageHelper();
