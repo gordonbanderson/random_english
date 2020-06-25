@@ -135,10 +135,7 @@ class RandomEnglishGenerator
 
         $result = \implode(" ", $sentenceArray) . '.';
 
-        if ($titleCase) {
-            $result = \ucwords($result);
-            $result = \substr_replace($result, "", -1);
-        }
+        $this->augmentSentenceTitleCase($titleCase, $result);
 
         $result = \str_replace('?.', '?', $result);
         $result = \str_replace('!.', '?', $result);
@@ -244,14 +241,25 @@ class RandomEnglishGenerator
     }
 
 
-    public function augmentIfIngVerb(bool $ing, string &$randomWord): string
+    public function augmentIfIngVerb(bool $ing, string &$randomWord): void
     {
-        if ($ing) {
-            $helper = new LanguageHelper();
-            $randomWord = $helper->ingVerb($randomWord);
+        if (!$ing) {
+            return;
         }
 
-        return $randomWord;
+        $helper = new LanguageHelper();
+        $randomWord = $helper->ingVerb($randomWord);
+    }
+
+
+    public function augmentSentenceTitleCase(bool $titleCase, string &$result): void
+    {
+        if (!$titleCase) {
+            return;
+        }
+
+        $result = \ucwords($result);
+        $result = \substr_replace($result, "", -1);
     }
 
 
