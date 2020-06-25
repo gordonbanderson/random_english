@@ -108,25 +108,25 @@ class RandomEnglishGenerator
                 /** @var string $randomWord */
                 $randomWord = $this->getRandomWord($wordType);
 
-                if ($pluralNoun) {
-                    $helper = new LanguageHelper();
-                    $randomWord = $helper->pluralizeNoun($randomWord);
-                }
+                // augment the random word if a plural noun or an ing verb
+                $this->augmentIfPluralNoun($pluralNoun, $randomWord);
+                $this->augmentIfIngVerb($ing, $randomWord);
 
-                if ($ing) {
-                    $helper = new LanguageHelper();
-                    $randomWord = $helper->ingVerb($randomWord);
-                }
+                // add the random word, and then the suffix of the word such as ?! or !!
                 $sentenceArray[] =$randomWord . $restOfWord;
+
+                // flag as randomized
                 $randomized = true;
 
                 break;
             }
 
+            // if we have found a randomized word, skill to the next word in the sentence
             if ($randomized) {
                 continue;
             }
 
+            // no randomized word has been found, aka no [verb] or [noun], thus append the possibly random word as is
             $sentenceArray[] = $possiblyRandomWord;
         }
 
@@ -230,6 +230,28 @@ class RandomEnglishGenerator
         }
 
         return $ing;
+    }
+
+
+    public function augmentIfPluralNoun(bool $pluralNoun, string &$randomWord): void
+    {
+        if (!$pluralNoun) {
+            return;
+        }
+
+        $helper = new LanguageHelper();
+        $randomWord = $helper->pluralizeNoun($randomWord);
+    }
+
+
+    public function augmentIfIngVerb(bool $ing, string &$randomWord): string
+    {
+        if ($ing) {
+            $helper = new LanguageHelper();
+            $randomWord = $helper->ingVerb($randomWord);
+        }
+
+        return $randomWord;
     }
 
 
