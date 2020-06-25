@@ -130,15 +130,10 @@ class RandomEnglishGenerator
             $sentenceArray[] = $possiblyRandomWord;
         }
 
-        // ensure sentence starts with a capital
-        $sentenceArray[0] = \ucfirst($sentenceArray[0]);
-
-        $result = \implode(" ", $sentenceArray) . '.';
-
+        $result = $this->makeArrayIntoSentence($sentenceArray);
         $this->augmentSentenceTitleCase($titleCase, $result);
 
-        $result = \str_replace('?.', '?', $result);
-        $result = \str_replace('!.', '?', $result);
+        $this->fixEndOfSentence($result);
 
         return $result;
     }
@@ -260,6 +255,23 @@ class RandomEnglishGenerator
 
         $result = \ucwords($result);
         $result = \substr_replace($result, "", -1);
+    }
+
+
+    /** @param array<string> $sentenceArray */
+    public function makeArrayIntoSentence(array $sentenceArray): string
+    {
+// ensure sentence starts with a capital
+        $sentenceArray[0] = \ucfirst($sentenceArray[0]);
+
+        return \implode(" ", $sentenceArray) . '.';
+    }
+
+
+    public function fixEndOfSentence(string &$result): void
+    {
+        $result = \str_replace('?.', '?', $result);
+        $result = \str_replace('!.', '?', $result);
     }
 
 
