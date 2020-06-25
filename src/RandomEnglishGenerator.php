@@ -81,36 +81,38 @@ class RandomEnglishGenerator
 
         $sentenceArray = [];
 
+        /** @var string $possiblyRandomWord */
         foreach ($splits as $possiblyRandomWord) {
             $randomized = false;
 
             foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
-                $pluralNoun = ($wordType === 'plural_noun');
-                if ($pluralNoun) {
-                    $wordType = 'noun';
-                    $possiblyRandomWord = \str_replace('plural_', '', $possiblyRandomWord);
-                }
+                $pluralNoun = $this->pluralNounCheck($wordType, $possiblyRandomWord);
+                $ing = $this->ingVerbCheck($wordType, $possiblyRandomWord);
 
-                $ing = \substr($wordType, -4)=== '_ing';
-                if ($ing) {
-                    $wordType = \str_replace('_ing', '', $wordType);
-                    $possiblyRandomWord = \str_replace('_ing', '', $possiblyRandomWord);
-                }
                 $start = '[' . $wordType . ']';
 
+                // check the start of the word as it may be suffixed by likes of a question of exclamation mark.
+                // If no match for the possible word type continue until the next one
                 if (\substr($possiblyRandomWord, 0, \strlen($start)) !== $start) {
                     continue;
                 }
 
+                // ---- we are now getting a random word from a file ----
+
+                // note the suffix of the word, and append this to the random word
                 $restOfWord = \str_replace($start, '', $possiblyRandomWord);
-                // country -> countries
+
+                // This avoids having to use 'countrie' in the sentence structure file : country -> countries
                 $wordType = \str_replace('country', 'countrie', $wordType);
+
+                /** @var string $randomWord */
                 $randomWord = $this->getRandomWord($wordType);
+
                 if ($pluralNoun) {
                     $helper = new LanguageHelper();
-
                     $randomWord = $helper->pluralizeNoun($randomWord);
                 }
+
                 if ($ing) {
                     $helper = new LanguageHelper();
                     $randomWord = $helper->ingVerb($randomWord);
@@ -125,8 +127,7 @@ class RandomEnglishGenerator
                 continue;
             }
 
-            $sentenceArray[] =
-                $possiblyRandomWord;
+            $sentenceArray[] = $possiblyRandomWord;
         }
 
         // ensure sentence starts with a capital
@@ -200,6 +201,35 @@ class RandomEnglishGenerator
         $plurableNoun = $this->getRandomWord('verb');
 
         return $plurableNoun . 'ing';
+    }
+
+
+    /**
+     * @param string $wordType The word type, e.g. 'noun' or 'verb'
+     * @return bool true if this is a plural noun
+     */
+    public function pluralNounCheck(string &$wordType, string &$possiblyRandomWord): bool
+    {
+        $pluralNoun = ($wordType === 'plural_noun');
+        if ($pluralNoun) {
+            $wordType = 'noun';
+            $possiblyRandomWord = \str_replace('plural_', '', $possiblyRandomWord);
+        }
+
+        return $pluralNoun;
+    }
+
+
+    /** @return bool true if this is a verb with ing */
+    public function ingVerbCheck(string &$wordType, string &$possiblyRandomWord): bool
+    {
+        $ing = \substr($wordType, -4) === '_ing';
+        if ($ing) {
+            $wordType = \str_replace('_ing', '', $wordType);
+            $possiblyRandomWord = \str_replace('_ing', '', $possiblyRandomWord);
+        }
+
+        return $ing;
     }
 
 
