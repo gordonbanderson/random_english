@@ -56,6 +56,33 @@ class RandomEnglishGeneratorTest extends TestCase
     }
 
 
+    public function testRandomCountry(): void
+    {
+        $generator = new RandomEnglishGenerator();
+        $generator->setConfig('Can I go on holiday to [country] due to Covid 19?');
+        $this->assertEquals('Can I go on holiday to Saint Lucia due to Covid 19?', $generator->sentence());
+    }
+
+
+    public function testRandomColour(): void
+    {
+        $generator = new RandomEnglishGenerator();
+        $generator->setConfig('I like [colour]');
+        $this->assertEquals('I like saddle brown.', $generator->sentence());
+    }
+
+
+    public function testRandomWordVerticalBars(): void
+    {
+        $generator = new RandomEnglishGenerator();
+        $generator->setConfig('a|b|c|d');
+        for ($i=0; $i<100; $i++) {
+            $sentence = $generator->sentence();
+            $this->assertTrue(\in_array($sentence, ['A.', 'B.', 'C.', 'D.'], true));
+        }
+    }
+
+
     public function testPluralNoun(): void
     {
         $generator = new RandomEnglishGenerator();
