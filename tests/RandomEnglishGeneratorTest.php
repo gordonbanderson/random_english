@@ -71,13 +71,14 @@ class RandomEnglishGeneratorTest extends TestCase
         $this->assertEquals('I like saddle brown.', $generator->sentence());
     }
 
-    public function testRandomWordVerticalBars()
+
+    public function testRandomWordVerticalBars(): void
     {
         $generator = new RandomEnglishGenerator();
         $generator->setConfig('a|b|c|d');
-        for($i=0; $i<100; $i++) {
+        for ($i=0; $i<100; $i++) {
             $sentence = $generator->sentence();
-            $this->assertTrue(in_array($sentence, ['A.', 'B.', 'C.', 'D.']));
+            $this->assertTrue(\in_array($sentence, ['A.', 'B.', 'C.', 'D.'], true));
         }
     }
 

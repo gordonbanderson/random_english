@@ -256,9 +256,9 @@ class RandomEnglishGenerator
     {
         $result = $possiblyRandomWord;
 
-        if (strstr($possiblyRandomWord, '|')) {
-            $splits = explode('|', $possiblyRandomWord);
-            shuffle($splits);
+        if (\strstr($possiblyRandomWord, '|')) {
+            $splits = \explode('|', $possiblyRandomWord);
+            \shuffle($splits);
             $result = $splits[0];
         } else {
             foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
@@ -280,22 +280,22 @@ class RandomEnglishGenerator
             }
         }
 
-
-
         // no randomized word has been found, aka no [verb] or [noun], thus append the possibly random word as is
         return $result;
     }
 
 
     /**
-     * @param string $randomWordTypeWithSuffix
      * @param string $wordType noun, verb, adjective etc
      * @param bool $pluralizeNoun if true pluralize a noun
      * @param bool $makeVerbIng if true make a verb an ing verb, e.g. run -> running
-     * @return string
      */
-    private function chooseRandomWord(string $randomWordTypeWithSuffix, string $wordType, bool $pluralizeNoun, bool $makeVerbIng): string
-    {
+    private function chooseRandomWord(
+        string $randomWordTypeWithSuffix,
+        string $wordType,
+        bool $pluralizeNoun,
+        bool $makeVerbIng
+    ): string {
         $start = '[' . $wordType . ']';
        // error_log('WT:' . $randomWordTypeWithSuffix);
 
@@ -313,7 +313,6 @@ class RandomEnglishGenerator
         $this->augmentIfIngVerb($makeVerbIng, $randomWord);
 
         // add the random word, and then the suffix of the word such as ?! or !!
-        $result = $randomWord . $restOfWord;
-        return $result;
+        return $randomWord . $restOfWord;
     }
 }
