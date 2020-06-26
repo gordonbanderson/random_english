@@ -269,27 +269,43 @@ class RandomEnglishGenerator
             }
 
             // ---- we are now getting a random word from a file ----
-
-            // note the suffix of the word, and append this to the random word
-            $restOfWord = \str_replace($start, '', $possiblyRandomWord);
-
-            // This avoids having to use 'countrie' in the sentence structure file : country -> countries
-            $wordType = \str_replace('country', 'countrie', $wordType);
-
-            /** @var string $randomWord */
-            $randomWord = $this->getRandomWord($wordType);
-
-            // augment the random word if a plural noun or an ing verb
-            $this->augmentIfPluralNoun($pluralNoun, $randomWord);
-            $this->augmentIfIngVerb($ing, $randomWord);
-
-            // add the random word, and then the suffix of the word such as ?! or !!
-            $result = $randomWord . $restOfWord;
+            $result = $this->chooseRandomWord($possiblyRandomWord, $wordType, $pluralNoun, $ing);
 
             break;
         }
 
         // no randomized word has been found, aka no [verb] or [noun], thus append the possibly random word as is
+        return $result;
+    }
+
+
+    /**
+     * @param string $randomWordTypeWithSuffix
+     * @param string $wordType noun, verb, adjective etc
+     * @param bool $pluralizeNoun if true pluralize a noun
+     * @param bool $makeVerbIng if true make a verb an ing verb, e.g. run -> running
+     * @return string
+     */
+    private function chooseRandomWord(string $randomWordTypeWithSuffix, string $wordType, bool $pluralizeNoun, bool $makeVerbIng): string
+    {
+        $start = '[' . $wordType . ']';
+        error_log('WT:' . $randomWordTypeWithSuffix);
+
+        // note the suffix of the word, and append this to the random word
+        $restOfWord = \str_replace($start, '', $randomWordTypeWithSuffix);
+
+        // This avoids having to use 'countrie' in the sentence structure file : country -> countries
+        $wordType = \str_replace('country', 'countrie', $wordType);
+
+        /** @var string $randomWord */
+        $randomWord = $this->getRandomWord($wordType);
+
+        // augment the random word if a plural noun or an ing verb
+        $this->augmentIfPluralNoun($pluralizeNoun, $randomWord);
+        $this->augmentIfIngVerb($makeVerbIng, $randomWord);
+
+        // add the random word, and then the suffix of the word such as ?! or !!
+        $result = $randomWord . $restOfWord;
         return $result;
     }
 }
