@@ -256,23 +256,31 @@ class RandomEnglishGenerator
     {
         $result = $possiblyRandomWord;
 
-        foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
-            $pluralNoun = $this->pluralNounCheck($wordType, $possiblyRandomWord);
-            $ing = $this->ingVerbCheck($wordType, $possiblyRandomWord);
+        if (strstr($possiblyRandomWord, '|')) {
+            $splits = explode('|', $possiblyRandomWord);
+            shuffle($splits);
+            $result = $splits[0];
+        } else {
+            foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
+                $pluralNoun = $this->pluralNounCheck($wordType, $possiblyRandomWord);
+                $ing = $this->ingVerbCheck($wordType, $possiblyRandomWord);
 
-            $start = '[' . $wordType . ']';
+                $start = '[' . $wordType . ']';
 
-            // check the start of the word as it may be suffixed by likes of a question of exclamation mark.
-            // If no match for the possible word type continue until the next one
-            if (\substr($possiblyRandomWord, 0, \strlen($start)) !== $start) {
-                continue;
+                // check the start of the word as it may be suffixed by likes of a question of exclamation mark.
+                // If no match for the possible word type continue until the next one
+                if (\substr($possiblyRandomWord, 0, \strlen($start)) !== $start) {
+                    continue;
+                }
+
+                // ---- we are now getting a random word from a file ----
+                $result = $this->chooseRandomWord($possiblyRandomWord, $wordType, $pluralNoun, $ing);
+
+                break;
             }
-
-            // ---- we are now getting a random word from a file ----
-            $result = $this->chooseRandomWord($possiblyRandomWord, $wordType, $pluralNoun, $ing);
-
-            break;
         }
+
+
 
         // no randomized word has been found, aka no [verb] or [noun], thus append the possibly random word as is
         return $result;
@@ -289,7 +297,7 @@ class RandomEnglishGenerator
     private function chooseRandomWord(string $randomWordTypeWithSuffix, string $wordType, bool $pluralizeNoun, bool $makeVerbIng): string
     {
         $start = '[' . $wordType . ']';
-        error_log('WT:' . $randomWordTypeWithSuffix);
+       // error_log('WT:' . $randomWordTypeWithSuffix);
 
         // note the suffix of the word, and append this to the random word
         $restOfWord = \str_replace($start, '', $randomWordTypeWithSuffix);
