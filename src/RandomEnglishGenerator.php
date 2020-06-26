@@ -90,8 +90,6 @@ class RandomEnglishGenerator
         $result = $this->makeArrayIntoSentence($sentenceArray);
         $this->augmentSentenceTitleCase($titleCase, $result);
 
-        $this->fixEndOfSentence($result);
-
         return $result;
     }
 
@@ -133,23 +131,13 @@ class RandomEnglishGenerator
     }
 
 
-    /** @return string a plural verb */
-    public function pluralVerb(): string
-    {
-        // @todo Choose a random verb source file
-        $plurableNoun = $this->getRandomWord('verb');
-
-        return $plurableNoun . 's';
-    }
-
-
-    /** @return string doing version of a verb */
+    /** @return string the ing version of a verb, e.g. run -> running */
     public function verbing(): string
     {
         // @todo Choose a random verb source file
-        $plurableNoun = $this->getRandomWord('verb');
+        $ingVerb = $this->getRandomWord('verb');
 
-        return $plurableNoun . 'ing';
+        return $ingVerb . 'ing';
     }
 
 
@@ -215,16 +203,33 @@ class RandomEnglishGenerator
     }
 
 
-    /** @param array<string> $sentenceArray */
+    /**
+     * Convert an array of strings into a sentence
+     * 1) Capitalize first letter
+     * 2) Glue words together with a space
+     * 3) Add a full stop
+     * 4) Deal with diferent sentence endings such as ! or ?
+     *
+     * @param array<string> $sentenceArray a sentence whose words are in an array of strings
+     * @return string a sentence
+     */
     public function makeArrayIntoSentence(array $sentenceArray): string
     {
-// ensure sentence starts with a capital
+        // ensure sentence starts with a capital
         $sentenceArray[0] = \ucfirst($sentenceArray[0]);
 
-        return \implode(" ", $sentenceArray) . '.';
+        $sentence = \implode(" ", $sentenceArray) . '.';
+        $this->fixEndOfSentence($sentence);
+
+        return $sentence;
     }
 
 
+    /**
+     * If a sentence ended with a question or exclamation mark prior to having a full stop appended, deal with it
+     *
+     * @param string $result The sentence, by reference, prior to being fixed
+     */
     public function fixEndOfSentence(string &$result): void
     {
         $result = \str_replace('?.', '?', $result);
