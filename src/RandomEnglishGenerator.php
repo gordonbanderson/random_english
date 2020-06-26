@@ -75,59 +75,16 @@ class RandomEnglishGenerator
         $structures = \explode(\PHP_EOL, $this->config);
         \shuffle($structures);
         $structure = $structures[0];
-        
-        $expression='/[\s]+/';
+
+        $expression = '/[\s]+/';
         $splits = \preg_split($expression, $structure, -1, \PREG_SPLIT_NO_EMPTY);
 
         $sentenceArray = [];
 
         /** @var string $possiblyRandomWord */
         foreach ($splits as $possiblyRandomWord) {
-            $randomized = false;
-
-            foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
-                $pluralNoun = $this->pluralNounCheck($wordType, $possiblyRandomWord);
-                $ing = $this->ingVerbCheck($wordType, $possiblyRandomWord);
-
-                $start = '[' . $wordType . ']';
-
-                // check the start of the word as it may be suffixed by likes of a question of exclamation mark.
-                // If no match for the possible word type continue until the next one
-                if (\substr($possiblyRandomWord, 0, \strlen($start)) !== $start) {
-                    continue;
-                }
-
-                // ---- we are now getting a random word from a file ----
-
-                // note the suffix of the word, and append this to the random word
-                $restOfWord = \str_replace($start, '', $possiblyRandomWord);
-
-                // This avoids having to use 'countrie' in the sentence structure file : country -> countries
-                $wordType = \str_replace('country', 'countrie', $wordType);
-
-                /** @var string $randomWord */
-                $randomWord = $this->getRandomWord($wordType);
-
-                // augment the random word if a plural noun or an ing verb
-                $this->augmentIfPluralNoun($pluralNoun, $randomWord);
-                $this->augmentIfIngVerb($ing, $randomWord);
-
-                // add the random word, and then the suffix of the word such as ?! or !!
-                $sentenceArray[] =$randomWord . $restOfWord;
-
-                // flag as randomized
-                $randomized = true;
-
-                break;
-            }
-
-            // if we have found a randomized word, skill to the next word in the sentence
-            if ($randomized) {
-                continue;
-            }
-
-            // no randomized word has been found, aka no [verb] or [noun], thus append the possibly random word as is
-            $sentenceArray[] = $possiblyRandomWord;
+            $word = $this->getWordOrRandomWord($possiblyRandomWord);
+            $sentenceArray[] = $word;
         }
 
         $result = $this->makeArrayIntoSentence($sentenceArray);
@@ -159,7 +116,7 @@ class RandomEnglishGenerator
         $nParagraph = \rand(1, $maxSentences);
         $sentences = [];
 
-        for ($i=0; $i< $nParagraph; $i++) {
+        for ($i = 0; $i < $nParagraph; $i++) {
             $sentences[] = $this->sentence();
         }
 
@@ -286,5 +243,48 @@ class RandomEnglishGenerator
         \shuffle($words);
 
         return $words[0];
+    }
+
+
+    /** @return string the above string as is, or a possibly randomized version, e.g. a random noun */
+    private function getWordOrRandomWord(string $possiblyRandomWord): string
+    {
+        $result = $possiblyRandomWord;
+
+        foreach (self::POSSIBLE_WORD_TYPES as $wordType) {
+            $pluralNoun = $this->pluralNounCheck($wordType, $possiblyRandomWord);
+            $ing = $this->ingVerbCheck($wordType, $possiblyRandomWord);
+
+            $start = '[' . $wordType . ']';
+
+            // check the start of the word as it may be suffixed by likes of a question of exclamation mark.
+            // If no match for the possible word type continue until the next one
+            if (\substr($possiblyRandomWord, 0, \strlen($start)) !== $start) {
+                continue;
+            }
+
+            // ---- we are now getting a random word from a file ----
+
+            // note the suffix of the word, and append this to the random word
+            $restOfWord = \str_replace($start, '', $possiblyRandomWord);
+
+            // This avoids having to use 'countrie' in the sentence structure file : country -> countries
+            $wordType = \str_replace('country', 'countrie', $wordType);
+
+            /** @var string $randomWord */
+            $randomWord = $this->getRandomWord($wordType);
+
+            // augment the random word if a plural noun or an ing verb
+            $this->augmentIfPluralNoun($pluralNoun, $randomWord);
+            $this->augmentIfIngVerb($ing, $randomWord);
+
+            // add the random word, and then the suffix of the word such as ?! or !!
+            $result = $randomWord . $restOfWord;
+
+            break;
+        }
+
+        // no randomized word has been found, aka no [verb] or [noun], thus append the possibly random word as is
+        return $result;
     }
 }
