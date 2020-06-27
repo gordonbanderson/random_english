@@ -186,8 +186,7 @@ class RandomEnglishGenerator
             return;
         }
 
-        $helper = new LanguageHelper();
-        $randomWord = $helper->ingVerb($randomWord);
+        $randomWord = $this->verbing();
     }
 
 

@@ -52,7 +52,7 @@ class RandomEnglishGeneratorTest extends TestCase
     {
         $generator = new RandomEnglishGenerator();
         $generator->setConfig('What are you [verb_ing]?');
-        $this->assertEquals('What are you rounding?', $generator->sentence());
+        $this->assertEquals('What are you puting?', $generator->sentence());
     }
 
 
