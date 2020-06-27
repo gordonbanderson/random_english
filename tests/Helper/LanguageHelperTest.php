@@ -171,15 +171,4 @@ class LanguageHelperTest extends TestCase
         $this->assertEquals("visiting", $this->helper->ingVerb("visit"));
         $this->assertEquals("pooling", $this->helper->ingVerb("pool"));
     }
-
-
-    public function testAllVerbs(): void
-    {
-        $wordType = 'verb';
-        $wordsFile = \dirname(__FILE__) . '/../../words/english_' . $wordType . 's.txt';
-        $words = \explode(\PHP_EOL, \trim(\file_get_contents($wordsFile)));
-        foreach ($words as $word) {
-            \error_log($word . ' --> ' . $this->helper->ingVerb($word));
-        }
-    }
 }

@@ -87,23 +87,15 @@ class RandomEnglishGeneratorTest extends TestCase
     {
         $generator = new RandomEnglishGenerator();
         $generator->setConfig('How many [plural_noun] do you have?');
-        $this->assertEquals('How many stranges do you have?', $generator->sentence());
+        $this->assertEquals('How many norths do you have?', $generator->sentence());
     }
 
     
     public function testParagraph(): void
     {
         $generator = new RandomEnglishGenerator();
-        \error_log($generator->paragraph());
-    }
-
-
-    public function skiptestLots(): void
-    {
-        $generator = new RandomEnglishGenerator();
-
-        for ($i=0; $i< 100; $i++) {
-            \error_log($generator->sentence());
-        }
+        $paragraph = $generator->paragraph(2);
+        $this->assertEquals('The baby is a future of an public prize and is so in the soft for his front and' .
+            ' the mildness of his city.  It was fun in the soup, as first was sound.', $paragraph);
     }
 }

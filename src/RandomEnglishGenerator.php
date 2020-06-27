@@ -176,8 +176,7 @@ class RandomEnglishGenerator
             return;
         }
 
-        $helper = new LanguageHelper();
-        $randomWord = $helper->pluralizeNoun($randomWord);
+        $randomWord = $this->pluralNoun();
     }
 
 
@@ -297,7 +296,6 @@ class RandomEnglishGenerator
         bool $makeVerbIng
     ): string {
         $start = '[' . $wordType . ']';
-       // error_log('WT:' . $randomWordTypeWithSuffix);
 
         // note the suffix of the word, and append this to the random word
         $restOfWord = \str_replace($start, '', $randomWordTypeWithSuffix);
