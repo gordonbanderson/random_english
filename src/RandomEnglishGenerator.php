@@ -2,8 +2,6 @@
 
 namespace Suilven\RandomEnglish;
 
-use Suilven\RandomEnglish\Helper\LanguageHelper;
-
 class RandomEnglishGenerator
 {
 
