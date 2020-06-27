@@ -11,8 +11,12 @@ if (is_file(__DIR__.'/../vendor/autoload.php') === true) {
 class RandomSentences
 {
 
+    private $climate;
+
     private function primeCLI()
     {
+        /** @var League\CLImate\CLImate climate */
+        $this->climate = new League\CLImate\CLImate();
         $cli = new Garden\Cli\Cli();
         $cli->description('Generate random English')
             ->command('sentences')
@@ -43,11 +47,6 @@ class RandomSentences
 
         /** @var \Garden\Cli\Args $args */
         $args = $cli->parse($argv, true);
-
-
-
-        error_log(print_r($args, 1));
-
         $cmd = $args->getCommand();
 
         $generator = new \Suilven\RandomEnglish\RandomEnglishGenerator();
@@ -57,21 +56,19 @@ class RandomSentences
             case 'sentences':
                 for ($i=0; $i < $number; $i++) {
                     $sentence = $generator->sentence();
-                    error_log($sentence);
+                    $this->climate->green($sentence);
                 }
                 break;
 
             case 'paragraphs':
                 for ($i=0; $i < $number; $i++) {
                     $para = $generator->paragraph();
-                    error_log($para);
-                    error_log("\n");
+                    $this->climate->green($para);
+                    $this->climate->border();
                 }
                 break;
 
         }
-
-        error_log('NUMBER: ' . $number);
 
     }
 }

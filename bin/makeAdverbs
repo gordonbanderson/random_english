@@ -1,0 +1,52 @@
+#!/usr/bin/env php
+<?php
+
+if (is_file(__DIR__ . '/../vendor/autoload.php') === true) {
+    include_once __DIR__ . '/../vendor/autoload.php';
+} else {
+    error_log('ERROR: Autoload file could not be found');
+    exit(1);
+}
+
+
+$path = getcwd() . '/words/english_adjectives.txt';
+$adjectives = file_get_contents($path);
+
+$syllable = new Vanderlee\Syllable\Syllable('en-us');
+echo $syllable->hyphenateText('Provide a plethora of paragraphs');
+
+
+$syllable = new Vanderlee\Syllable\Syllable('en-us');
+$adjArray = explode(PHP_EOL, $adjectives);
+$adverbs = [];
+foreach ($adjArray as $adjective) {
+    $nSyllables = $syllable->countSyllablesText($adjective);
+    $lastChar  = substr($adjective, -1);
+    $last2Chars  = substr($adjective, -2);
+
+    $thirdLastChar = substr($adjective, -3, 1);
+    $thirdLastIsConsontant = false;
+
+    if (ctype_alpha($thirdLastChar) && !in_array($thirdLastChar, ['a', 'e', 'i', 'o', 'u'])) {
+        $thirdLastIsConsontant = true;
+    }
+
+    $adverb = 'UNKNOWN';
+    if ($nSyllables == 2 && $lastChar == 'y') {
+        $adverb = $adjective;
+    } elseif ($last2Chars == 'le' && $thirdLastIsConsontant) {
+        $adverb = $adjective;
+    } elseif (in_array($adjective, ['friendly', 'lively'])) {
+        $adverb = $adjective;
+    } else {
+        $adverb = $adjective . 'ly';
+    }
+
+    error_log('ADVERB: ' . $adverb);
+    $adverbs[] = $adverb;
+}
+
+$path = getcwd() . '/words/english_adverbs.txt';
+file_put_contents($path, implode(PHP_EOL, $adverbs));
+
+
