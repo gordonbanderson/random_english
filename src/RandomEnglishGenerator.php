@@ -2,6 +2,8 @@
 
 namespace Suilven\RandomEnglish;
 
+use Faker\Factory;
+
 class RandomEnglishGenerator
 {
 
@@ -42,6 +44,32 @@ class RandomEnglishGenerator
         'womens_name',
         'country',
         'colour',
+    ];
+
+    private const POSSIBLE_FAKER_TYPES=[
+        'address',
+        'name',
+        'randomDigit',
+        'randomLetter',
+        'randomNumber',
+        'title',
+        'titleMale',
+        'titleFemale',
+        'firstNameMale',
+        'firstNameFemale',
+        'lastName',
+
+        'catchPhrase',
+        'bs',
+        'company',
+        'companySuffix',
+        'jobTitle',
+
+        'realText',
+
+        'dayOfWeek',
+        'monthName',
+
     ];
 
     /** @var string configuration file for sentences */
@@ -230,6 +258,7 @@ class RandomEnglishGenerator
     {
         $result = \str_replace('?.', '?', $result);
         $result = \str_replace('!.', '?', $result);
+        $result = \str_replace('..', '.', $result);
     }
 
 
@@ -273,6 +302,19 @@ class RandomEnglishGenerator
                 $result = $this->chooseRandomWord($possiblyRandomWord, $wordType, $pluralNoun, $ing);
 
                 break;
+            }
+
+            $faker = Factory::create();
+            foreach (self::POSSIBLE_FAKER_TYPES as $wordType) {
+                $start = '[' . $wordType . ']';
+
+                // check the start of the word as it may be suffixed by likes of a question of exclamation mark.
+                // If no match for the possible word type continue until the next one
+                if (\substr($possiblyRandomWord, 0, \strlen($start)) !== $start) {
+                    continue;
+                }
+
+                $result = $faker->$wordType;
             }
         }
 
