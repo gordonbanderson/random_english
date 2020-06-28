@@ -68,7 +68,7 @@ class RandomEnglishGenerator
         'realText',
 
         'dayOfWeek',
-        'monthName'
+        'monthName',
 
     ];
 
@@ -305,8 +305,7 @@ class RandomEnglishGenerator
             }
 
             $faker = Factory::create();
-            foreach(self::POSSIBLE_FAKER_TYPES as $wordType)
-            {
+            foreach (self::POSSIBLE_FAKER_TYPES as $wordType) {
                 $start = '[' . $wordType . ']';
 
                 // check the start of the word as it may be suffixed by likes of a question of exclamation mark.
@@ -315,7 +314,7 @@ class RandomEnglishGenerator
                     continue;
                 }
 
-                $result  = $faker->$wordType;
+                $result = $faker->$wordType;
             }
         }
 
