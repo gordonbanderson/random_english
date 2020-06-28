@@ -65,7 +65,10 @@ class RandomEnglishGenerator
         'companySuffix',
         'jobTitle',
 
-        'realText'
+        'realText',
+
+        'dayOfWeek',
+        'monthName'
 
     ];
 
