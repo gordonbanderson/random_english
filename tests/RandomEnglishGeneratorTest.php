@@ -16,6 +16,13 @@ class RandomEnglishGeneratorTest extends TestCase
     }
 
 
+    public function testFakerRandomName()
+    {
+        $generator = new RandomEnglishGenerator();
+        $generator->setConfig('My name is [name]');
+        $this->assertEquals('My name is Prof. Tomasa Lind Jr.', $generator->sentence());
+    }
+
     public function testSentence(): void
     {
         $generator = new RandomEnglishGenerator();
