@@ -3,6 +3,7 @@
 namespace Suilven\RandomEnglish;
 
 use Faker\Factory;
+use Suilven\RandomEnglish\Helper\LanguageHelper;
 
 class RandomEnglishGenerator
 {
@@ -161,9 +162,9 @@ class RandomEnglishGenerator
     public function verbing(): string
     {
         // @todo Choose a random verb source file
-        $ingVerb = $this->getRandomWord('verb');
-
-        return $ingVerb . 'ing';
+        $verb = $this->getRandomWord('verb');
+        $helper = new LanguageHelper();
+        return $helper->ingVerb($verb);
     }
 
 
