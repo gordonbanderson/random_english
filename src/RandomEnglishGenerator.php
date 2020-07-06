@@ -164,6 +164,7 @@ class RandomEnglishGenerator
         // @todo Choose a random verb source file
         $verb = $this->getRandomWord('verb');
         $helper = new LanguageHelper();
+
         return $helper->ingVerb($verb);
     }
 

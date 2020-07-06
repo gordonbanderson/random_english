@@ -178,6 +178,5 @@ class LanguageHelperTest extends TestCase
         $this->assertEquals("lying", $this->helper->ingVerb("lie"));
         $this->assertEquals("needling", $this->helper->ingVerb("needle"));
         $this->assertEquals("juicing", $this->helper->ingVerb("juice"));
-
     }
 }
