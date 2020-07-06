@@ -119,6 +119,33 @@ class LanguageHelper
                 break;
         }
 
+        $this->fixSuffix($result);
+
         return $result;
+    }
+
+
+    /**
+     * @param string $word the word whose suffix needs fixed
+     */
+    public function fixSuffix(&$word)
+    {
+        $suffixes = [
+            'eeing' => 'eeing',
+          'ieing' => 'ying',
+            'eing' => 'ing'
+        ];
+
+        $incorrectSuffixes = array_keys($suffixes);
+        $wordLength = strlen($word);
+
+        foreach($incorrectSuffixes as $incorrectSuffix) {
+            $suffixLength = strlen($incorrectSuffix);
+            $actualSuffix = substr($word, -$suffixLength);
+            if ($actualSuffix === $incorrectSuffix) {
+                $word = substr($word,0, $wordLength-$suffixLength) . $suffixes[$incorrectSuffix];
+                break;
+            }
+        }
     }
 }
